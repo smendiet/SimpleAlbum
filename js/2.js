@@ -4,7 +4,8 @@ var viewModel1 = {
     es: ko.observable('uno')
   },
   data: ko.observableArray(),
-  data2: ko.observableArray()
+  data2: ko.observableArray(),
+  history: ko.observableArray()
 };
 
 var data = [{
@@ -62,7 +63,7 @@ var data2 = [{
 }];
 
 function getDefaultData() {
-  var cantImage = 639, i = 1;
+  var cantImage = 639, i = 0;
 
   for(;i <= cantImage; i++) {
     data2[0].imagenes.push(getDefaultImage(i));
@@ -87,7 +88,7 @@ function loadData() {
 function searchImage() {
   var search_value = $("#two-txt-search").val(),
       max = viewModel1.data2()[0].imagenes.length,
-      message;
+      message, isPositive = $("#checkPositive").is(":checked");
 
   if (search_value === ''){
     alertify.alert('Vacio')
@@ -98,10 +99,20 @@ function searchImage() {
 
         alertify.alert(message);
       } else {
-        if (isContain(search_value)) message = 'SI, tienes la imagen ' + search_value + '.';
-        else message = 'NO, no tienes la imagen ' + search_value + '.' ;
+        var hasImage = (isPositive) ? isContain(search_value): !isContain(search_value);
+
+        if (hasImage) {
+          message = 'SI, tienes la imagen ' + search_value + '.';
+        } else {
+          message = 'NO, no tienes la imagen ' + search_value + '.' ;
+        } 
 
         alertify.log(message, "success", 0);
+        viewModel1.history.push({
+          num: search_value,
+          text: message,
+          status: hasImage
+        });
       }
     } else {
       alertify.log('Error, ' + search_value + ' valor no valido', 'error', 0)
@@ -109,6 +120,10 @@ function searchImage() {
 
     $("#two-txt-search").val('');
   }
+}
+
+function filterBool(element) {
+  return element.has == true;
 }
 
 function isInteger(value) {
@@ -147,10 +162,13 @@ $(function() {
 
   $('#two-txt-search').keyup(function(event) {
     if (event.which != 13) return;
-     
     event.preventDefault();
-
     searchImage()
+  });
+
+  $("#two-btn-view-history").click(function(event) {
+    event.preventDefault();
+    console.log(search_history);
   });
 
   ko.applyBindings(viewModel1, $("#two-body").get(0))

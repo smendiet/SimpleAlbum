@@ -9,6 +9,7 @@
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="./js/knockout-3.1.0.js"></script>
   <script type="text/javascript" src="./js/1.js"></script>
+  <script type="text/javascript" src="./js/data.js"></script>
 </head>
 <body id="one-body">
   <div id="one-container">
@@ -32,27 +33,28 @@
                   class="btn btn-primary">Cargar</button>
           <button type="button" id="btn-save" data-loading-text="Cargando..."
                   class="btn btn-success">Guardar</button>
-          <button type="button" id="btnView" data-loading-text="Cargando..."
+          <button type="button" id="btn-view" data-loading-text="Cargando..."
                   class="btn btn-info">View</button>
           <button type="button" id="btn-clean" data-loading-text="Cargando..."
                   class="btn btn-warning">Limpiar</button>
           <button type="button" id="btn-delete" data-loading-text="Cargando..."
                   class="btn btn-danger">Borrar</button>
+          <input id="onlyChecked" type="checkbox" data-bind="checked: onlyChecked">Marked</input>
         </div>
       </p>
     </div>
     
-    <div id="one-albumn" style="padding: 10px;">
+    <div id="one-albumn" style="padding: 0px;">
       <div data-bind="foreach: data2">
         <div class="panel panel-default">
           <div class="panel-heading"><span data-bind="text: name"></span></div>
-            <div data-bind="foreach: imagenes" class="container-fluid">
-              <!-- ko if: num % 6 == 0 -->
-                <input type="checkbox" data-bind="checked: has" ><span data-bind="text: num" style="padding: 10px;"></span><br />
+            <div data-bind="foreach: imagenes.filter(filterMarked)" class="container-fluid">
+              <!-- ko if: (num + 1) % 26 == 0-->
+                <input type="checkbox" data-bind="checked: has" ><span data-bind="text: zeroPad(num, 3)" style="padding: 5px;"></span><br />
               <!-- /ko -->
-              <!-- ko if: num % 6 != 0 -->
+              <!-- ko if: (num + 1) % 26 != 0-->
               <input type="checkbox" data-bind="checked: has">
-              <span data-bind="text: num" style="padding: 10px;"></span>
+              <span data-bind="text: zeroPad(num, 3)" style="padding: 0px;"></span>
               <!-- /ko -->
             </div>  
         </div>

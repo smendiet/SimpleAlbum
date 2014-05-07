@@ -21,6 +21,10 @@
       <p>
         <button type="button" id="two-btn-load" data-loading-text="Cargando..."
             class="btn btn-primary btn-md" style="width: 120px;">Cargar</button>
+        <input id="checkPositive" type="checkbox" checked="true">+</input>
+        <button type="button" id="two-btn-view-history" data-loading-text="Cargando..."
+            class="btn btn-primary btn-md" style="width: 120px;">history</button>
+        <span data-bind="text: viewModel1.data2()[0].imagenes.filter(filterBool).length"></span>
       </p>
     </div>
     <div>
@@ -32,6 +36,23 @@
         </span>
       </div>
     </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Num</td>
+          <td>text</td>
+          <td>Status</td>
+        </tr>
+      </thead>
+      <tbody data-bind="foreach: history">
+        <tr>
+          <td><span data-bind="text: num"></span></td>
+          <td><span data-bind="text: text"></span></td>
+          <td><span data-bind="text: status"></span></td>
+        </tr>
+      </tbody>
+    </table>
+    
   </div>
 </body>
 </html>

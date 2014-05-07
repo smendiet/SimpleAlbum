@@ -4,7 +4,10 @@ var viewModel1 = {
     es: ko.observable('uno')
   },
   data: ko.observableArray(),
-  data2: ko.observableArray()
+  data2: ko.observableArray(),
+  history: ko.observableArray(),
+  onlyChecked: ko.observable(false)
+
 };
 
 var data = [{
@@ -62,11 +65,24 @@ var data2 = [{
 }];
 
 function getDefaultData() {
-  var cantImage = 639, i = 1;
+  var cantImage = 639, i = 0;
 
   for(;i <= cantImage; i++) {
     data2[0].imagenes.push(getDefaultImage(i));
   }
+}
+
+function filterBool(element) {
+  return element.has == true;
+}
+
+function filterMarked(element) {
+  return (viewModel1.onlyChecked()) ? filterBool(element) : true;
+}
+
+function zeroPad(num, places) {
+  var zero = places - num.toString().length + 1;
+  return Array(+(zero > 0 && zero)).join("0") + num;
 }
 
 function getDefaultImage(n) {
@@ -81,16 +97,23 @@ function loadData() {
   }
 }
 
+function isDefined(object) {
+  return (typeof object != 'undefined');
+}
+
 $(function() {
-  debugger;
   console.log('jQuery instalado');
 
-  getDefaultData();
+  if (!isDefined(dataPre)) {
+    getDefaultData();
+    viewModel1.data2(data2);
+  } else {
+    viewModel1.data2(dataPre.data2);
+  }
 
   viewModel1.data(data);
-  viewModel1.data2(data2);
 
-  $("#btnView").click(function() {
+  $("#btn-view").click(function() {
     console.log(ko.toJSON(viewModel1));
   });
 
