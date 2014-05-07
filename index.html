@@ -1,63 +1,10 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Index</title>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.js"></script>
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="./js/knockout-3.1.0.js"></script>
-  <script type="text/javascript" src="./js/1.js"></script>
+  <title>index</title>
 </head>
-<body id="one-body">
-  <div id="one-container">
-    <div data-bind="foreach: data" class="hidden">
-      <h2><span data-bind="text: name.es"></span></h2>
-      <div data-bind="foreach: season">
-        <h3><span data-bind="text: code"></span></h3>
-        <div data-bind="foreach: episodes">
-          <span data-bind="text: code"></span> |
-          <span data-bind="text: name['en']"></span><br />
-        </div>
-      </div>
-    </div>
-    
-    <div class="jumbotron">
-      <h1><span data-bind="text: title.es()"></span></h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, suscipit, facere omnis odio nam in non ducimus expedita maxime quae dignissimos sit facilis similique! Iusto, veritatis sequi placeat illo blanditiis!</p>
-      <p>
-        <div>
-          <button type="button" id="btn-load" data-loading-text="Cargando..."
-                  class="btn btn-primary">Cargar</button>
-          <button type="button" id="btn-save" data-loading-text="Cargando..."
-                  class="btn btn-success">Guardar</button>
-          <button type="button" id="btnView" data-loading-text="Cargando..."
-                  class="btn btn-info">View</button>
-          <button type="button" id="btn-clean" data-loading-text="Cargando..."
-                  class="btn btn-warning">Limpiar</button>
-          <button type="button" id="btn-delete" data-loading-text="Cargando..."
-                  class="btn btn-danger">Borrar</button>
-        </div>
-      </p>
-    </div>
-    
-    <div id="one-albumn" style="padding: 10px;">
-      <div data-bind="foreach: data2">
-        <div class="panel panel-default">
-          <div class="panel-heading"><span data-bind="text: name"></span></div>
-            <div data-bind="foreach: imagenes" class="container-fluid">
-              <!-- ko if: num % 6 == 0 -->
-                <input type="checkbox" data-bind="checked: has" ><span data-bind="text: num" style="padding: 10px;"></span><br />
-              <!-- /ko -->
-              <!-- ko if: num % 6 != 0 -->
-              <input type="checkbox" data-bind="checked: has">
-              <span data-bind="text: num" style="padding: 10px;"></span>
-              <!-- /ko -->
-            </div>  
-        </div>
-      </div>
-    </div>
-  </div>
+<body>
+  
 </body>
 </html>
